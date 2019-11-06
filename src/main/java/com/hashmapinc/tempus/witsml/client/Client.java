@@ -26,6 +26,8 @@ import com.hashmapinc.tempus.witsml.api.WitsmlClient;
 import com.hashmapinc.tempus.witsml.api.WitsmlVersion;
 import com.hashmapinc.tempus.WitsmlObjects.Util.WitsmlMarshal;
 import com.hashmapinc.tempus.WitsmlObjects.Util.WitsmlVersionTransformer;
+
+import org.apache.axis.AxisProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -83,6 +85,7 @@ public class Client implements WitsmlClient {
     private void setupClient(String url) {
         WMLSLocator locator = new WMLSLocator();
         this.url = url;
+      
         locator.setStoreSoapPortEndpointAddress(url);
         try {
             witsmlClient = (StoreSoapBindingStub) locator.getStoreSoapPort();
@@ -153,6 +156,7 @@ public class Client implements WitsmlClient {
     public String getVersion(){
         try {
             return witsmlClient.WMLS_GetVersion();
+            
         } catch (RemoteException e) {
             log.error("Error in getVersion of api.Client " + e.getMessage());
             return null;
@@ -281,6 +285,12 @@ public class Client implements WitsmlClient {
         StringHolder suppMsgOut = new StringHolder();
         short responseCode = witsmlClient.WMLS_GetFromStore(objectType, query, optionsIn, capabilitiesIn,  xmlOut, suppMsgOut);
         return new WitsmlResponse(xmlOut.value, suppMsgOut.value, responseCode);
+    }
+    @Override
+    public WitsmlResponse deleteObjectQuery(String objectType, String query, String optionsIn, String capabilitiesIn) throws RemoteException {
+    	StringHolder suppMsgOut = new StringHolder();
+    	short responseCode = witsmlClient.WMLS_DeleteFromStore(objectType, query, optionsIn, capabilitiesIn,  suppMsgOut);
+    	return new WitsmlResponse("", suppMsgOut.value, responseCode);
     }
 
     /**
@@ -738,4 +748,6 @@ public class Client implements WitsmlClient {
         if (converted.equals("")) return null;
         return converted;
     }
+    
+
 }

@@ -109,4 +109,7 @@ public interface WitsmlClient {
     ObjDtsMeasurements getDtsMeasurementsAsObj(WitsmlQuery witsmlQuery) throws Exception;
 
     ObjTrajectoryStations getTrajectoryStationsAsObj(WitsmlQuery witsmlQuery) throws Exception;
+
+	com.hashmapinc.tempus.witsml.client.WitsmlResponse deleteObjectQuery(String objectType, String query,
+			String optionsIn, String capabilitiesIn) throws RemoteException;
 }

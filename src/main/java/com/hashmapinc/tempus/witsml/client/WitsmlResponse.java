@@ -10,6 +10,10 @@ public class WitsmlResponse implements com.hashmapinc.tempus.witsml.api.WitsmlRe
         this.suppMsgOut = suppMsgOut;
         this.responseCode = responseCode;
     }
+    public WitsmlResponse(String suppMsgOut, short responseCode) {
+    	this.suppMsgOut = suppMsgOut;
+    	this.responseCode = responseCode;
+    }
 
     public String getXmlOut() {
         return xmlOut;

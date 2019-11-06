@@ -673,4 +673,12 @@ public class MockClient implements WitsmlClient {
         if (converted.equals("")) return null;
         return converted;
     }
+
+	@Override
+	public com.hashmapinc.tempus.witsml.client.WitsmlResponse deleteObjectQuery(String objectType, String query,
+			String optionsIn, String capabilitiesIn) throws RemoteException {
+		// TODO Check UIDS are set method stub
+		
+		return null;
+	}
 }
